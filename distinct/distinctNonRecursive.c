@@ -1,18 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int compare(const void *a, const void *b) {
-    int x = *(int *)a;
-    int y = *(int *)b;
-    return (x > y) - (x < y);
+void sort(int A[], int N) {
+    for (int i = 0; i < N - 1; i++) {
+        for (int j = 0; j < N - i - 1; j++) {
+            if (A[j] > A[j + 1]) {
+                int temp = A[j];
+                A[j] = A[j + 1];
+                A[j + 1] = temp;
+            }
+        }
+    }
 }
 
 int countDistinct(int A[], int N, int output[]) {
     if (N == 0) return 0;
-    qsort(A, N, sizeof(int), compare);
+
+    sort(A, N);  // Sort manually
     int count = 1;
     output[0] = A[0];
     int j = 1;
+
     for (int i = 1; i < N; i++) {
         if (A[i] != A[i - 1]) {
             output[j++] = A[i];

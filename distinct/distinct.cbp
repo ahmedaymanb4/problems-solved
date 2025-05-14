@@ -31,7 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="distinctNonRecursive.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="distinctRecursive.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

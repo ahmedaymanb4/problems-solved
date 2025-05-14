@@ -1,25 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int compare(const void *a, const void *b) {
-    int x = *(int *)a;
-    int y = *(int *)b;
-    return (x > y) - (x < y);
+void sort(int A[], int N) {
+    if (N == 1) return;
+
+    for (int i = 0; i < N - 1; i++) {
+        if (A[i] > A[i + 1]) {
+            int temp = A[i];
+            A[i] = A[i + 1];
+            A[i + 1] = temp;
+        }
+    }
+
+    sort(A, N - 1);
 }
 
 int countDistinctRecursive(int A[], int index, int size, int count, int output[], int j) {
     if (index == size) return count;
     if (A[index] != A[index - 1]) {
-        output[j] = A[index];
+        output[j++] = A[index];
         count++;
-        j++;
     }
     return countDistinctRecursive(A, index + 1, size, count, output, j);
 }
 
 int startRecursive(int A[], int N, int output[]) {
     if (N == 0) return 0;
-    qsort(A, N, sizeof(int), compare);
+
+    sort(A, N);  // Use manual sort
     output[0] = A[0];
     return countDistinctRecursive(A, 1, N, 1, output, 1);
 }
